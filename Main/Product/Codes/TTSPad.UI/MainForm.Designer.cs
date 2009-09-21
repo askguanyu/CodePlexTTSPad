@@ -43,6 +43,7 @@
             this.toolStripMenuItemSave = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemSaveas = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemPageSetup = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,6 @@
             this.textBoxMainText = new System.Windows.Forms.TextBox();
             this.radioButtonMale = new System.Windows.Forms.RadioButton();
             this.radioButtonFemale = new System.Windows.Forms.RadioButton();
-            this.toolStripMenuItemPageSetup = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -132,52 +132,59 @@
             // toolStripMenuItemNew
             // 
             this.toolStripMenuItemNew.Name = "toolStripMenuItemNew";
-            this.toolStripMenuItemNew.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemNew.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemNew.Text = "New";
             this.toolStripMenuItemNew.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripMenuItemOpen
             // 
             this.toolStripMenuItemOpen.Name = "toolStripMenuItemOpen";
-            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemOpen.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemOpen.Text = "Open...";
             this.toolStripMenuItemOpen.Click += new System.EventHandler(this.toolStripMenuItemOpen_Click);
             // 
             // toolStripMenuItemSave
             // 
             this.toolStripMenuItemSave.Name = "toolStripMenuItemSave";
-            this.toolStripMenuItemSave.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemSave.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemSave.Text = "Save";
             this.toolStripMenuItemSave.Click += new System.EventHandler(this.toolStripMenuItemSave_Click);
             // 
             // toolStripMenuItemSaveas
             // 
             this.toolStripMenuItemSaveas.Name = "toolStripMenuItemSaveas";
-            this.toolStripMenuItemSaveas.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemSaveas.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemSaveas.Text = "Save As...";
             this.toolStripMenuItemSaveas.Click += new System.EventHandler(this.toolStripMenuItemSaveas_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
+            // 
+            // toolStripMenuItemPageSetup
+            // 
+            this.toolStripMenuItemPageSetup.Name = "toolStripMenuItemPageSetup";
+            this.toolStripMenuItemPageSetup.Size = new System.Drawing.Size(142, 22);
+            this.toolStripMenuItemPageSetup.Text = "Page Setup...";
+            this.toolStripMenuItemPageSetup.Click += new System.EventHandler(this.toolStripMenuItemPageSetup_Click);
             // 
             // toolStripMenuItemPrint
             // 
             this.toolStripMenuItemPrint.Name = "toolStripMenuItemPrint";
-            this.toolStripMenuItemPrint.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemPrint.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemPrint.Text = "Print...";
             this.toolStripMenuItemPrint.Click += new System.EventHandler(this.toolStripMenuItemPrint_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(139, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(142, 22);
             this.toolStripMenuItemExit.Text = "Exit";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
             // 
@@ -256,6 +263,7 @@
             // 
             // radioButtonMale
             // 
+            this.radioButtonMale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButtonMale.AutoSize = true;
             this.radioButtonMale.Checked = true;
             this.radioButtonMale.Location = new System.Drawing.Point(12, 397);
@@ -268,6 +276,7 @@
             // 
             // radioButtonFemale
             // 
+            this.radioButtonFemale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButtonFemale.AutoSize = true;
             this.radioButtonFemale.Location = new System.Drawing.Point(63, 397);
             this.radioButtonFemale.Name = "radioButtonFemale";
@@ -275,13 +284,6 @@
             this.radioButtonFemale.TabIndex = 6;
             this.radioButtonFemale.Text = "Female";
             this.radioButtonFemale.UseVisualStyleBackColor = true;
-            // 
-            // toolStripMenuItemPageSetup
-            // 
-            this.toolStripMenuItemPageSetup.Name = "toolStripMenuItemPageSetup";
-            this.toolStripMenuItemPageSetup.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItemPageSetup.Text = "Page Setup...";
-            this.toolStripMenuItemPageSetup.Click += new System.EventHandler(this.toolStripMenuItemPageSetup_Click);
             // 
             // MainForm
             // 
