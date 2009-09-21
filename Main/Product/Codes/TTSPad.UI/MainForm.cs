@@ -6,6 +6,7 @@
 namespace GY.TTSPad.UI
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Drawing;
     using System.Drawing.Printing;
     using System.Globalization;
@@ -57,6 +58,11 @@ namespace GY.TTSPad.UI
         /// <summary>
         ///
         /// </summary>
+        private ReadOnlyCollection<InstalledVoice> installedVoice;
+
+        /// <summary>
+        ///
+        /// </summary>
         private string currentFile;
 
         /// <summary>
@@ -77,8 +83,16 @@ namespace GY.TTSPad.UI
             InitializeComponent();
             this.Text = String.Format(CultureInfo.CurrentCulture, "{0}", AssemblyTitle);
             this.speechSynthesizer = new SpeechSynthesizer();
+            this.installedVoice = this.speechSynthesizer.GetInstalledVoices();
             this.speechSynthesizer.SpeakProgress += SpeakProgress;
             this.speechSynthesizer.SpeakCompleted += SpeakCompleted;
+
+            foreach (var item in this.installedVoice)
+            {
+                this.comboBoxVoice.Items.Add(item.VoiceInfo.Name);
+            }
+
+            this.comboBoxVoice.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -130,7 +144,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemAbout_Click(object sender, EventArgs e)
+        private void MenuItemAbout(object sender, EventArgs e)
         {
             new AboutForm().Show();
         }
@@ -155,7 +169,7 @@ namespace GY.TTSPad.UI
         /// <param name="e"></param>
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            this.speechSynthesizer.SelectVoiceByHints(this.radioButtonMale.Checked ? VoiceGender.Male : VoiceGender.Female, VoiceAge.Adult);
+            this.speechSynthesizer.SelectVoice(this.comboBoxVoice.SelectedItem as string);
             if (SynthesizerState.Speaking == this.speechSynthesizer.State)
             {
                 this.speechSynthesizer.SpeakAsyncCancelAll();
@@ -199,16 +213,35 @@ namespace GY.TTSPad.UI
         {
             saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog.ShowDialog();
-            this.currentFile = saveFileDialog.FileName;
-            if (!string.IsNullOrEmpty(this.currentFile))
+            switch (saveFileDialog.ShowDialog())
             {
-                using (var file = new StreamWriter(this.currentFile))
-                {
-                    file.Write(textBoxMainText.Text);
-                }
+                case DialogResult.Abort:
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                case DialogResult.Ignore:
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.None:
+                    break;
+                case DialogResult.Retry:
+                case DialogResult.OK:
+                case DialogResult.Yes:
+                    this.currentFile = saveFileDialog.FileName;
+                    if (!string.IsNullOrEmpty(this.currentFile))
+                    {
+                        using (var file = new StreamWriter(this.currentFile))
+                        {
+                            file.Write(textBoxMainText.Text);
+                        }
 
-                this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", AssemblyTitle, this.currentFile);
+                        this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", AssemblyTitle, this.currentFile);
+                    }
+
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -217,7 +250,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MenuItemNew(object sender, EventArgs e)
         {
             this.textBoxMainText.Clear();
             this.currentFile = string.Empty;
@@ -228,7 +261,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemExit_Click(object sender, EventArgs e)
+        private void MenuItemExit(object sender, EventArgs e)
         {
             if (!this.Disposing)
             {
@@ -241,21 +274,40 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemOpen_Click(object sender, EventArgs e)
+        private void MenuItemOpen(object sender, EventArgs e)
         {
             openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            openFileDialog.ShowDialog();
-            this.currentFile = openFileDialog.FileName;
-            if (!string.IsNullOrEmpty(this.currentFile))
+            switch (openFileDialog.ShowDialog())
             {
-                using (var file = File.OpenText(this.currentFile))
-                {
-                    this.textBoxMainText.Text = file.ReadToEnd();
-                }
-            }
+                case DialogResult.Abort:
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                case DialogResult.Ignore:
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.None:
+                    break;
+                case DialogResult.Retry:
+                case DialogResult.OK:
+                case DialogResult.Yes:
+                    this.currentFile = openFileDialog.FileName;
+                    if (!string.IsNullOrEmpty(this.currentFile))
+                    {
+                        using (var file = File.OpenText(this.currentFile))
+                        {
+                            this.textBoxMainText.Text = file.ReadToEnd();
+                        }
 
-            this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", AssemblyTitle, this.currentFile);
+                        this.Text = String.Format(CultureInfo.CurrentCulture, "{0} - {1}", AssemblyTitle, this.currentFile);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -263,7 +315,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemSave_Click(object sender, EventArgs e)
+        private void MenuItemSave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(this.currentFile))
             {
@@ -283,7 +335,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemSaveas_Click(object sender, EventArgs e)
+        private void MenuItemSaveAs(object sender, EventArgs e)
         {
             this.SaveTextToFile();
         }
@@ -293,7 +345,7 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemPageSetup_Click(object sender, EventArgs e)
+        private void MenuItemPageSetup(object sender, EventArgs e)
         {
             this.pageSetupDialog = new PageSetupDialog();
             this.pageSetupDialog.Document = null == this.printDocument ? new PrintDocument() : this.printDocument;
@@ -307,7 +359,27 @@ namespace GY.TTSPad.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripMenuItemPrint_Click(object sender, EventArgs e)
+        private void MenuItemPrintPreview(object sender, EventArgs e)
+        {
+            new PrintPreviewDialog().ShowDialog();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemSelectAll(object sender, EventArgs e)
+        {
+            this.textBoxMainText.SelectAll();
+        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemPrint(object sender, EventArgs e)
         {
             if (null == this.printDocument)
             {
@@ -319,11 +391,30 @@ namespace GY.TTSPad.UI
                 this.pageSettings = new PageSettings();
             }
 
-            this.printDocument.PrintPage += PrintPage;
             this.printDialog = new PrintDialog();
-            this.printDialog.ShowDialog();
-            this.printDocument.Print();
-            this.printDocument.PrintPage -= PrintPage;
+
+            switch (this.printDialog.ShowDialog())
+            {
+                case DialogResult.Abort:
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                case DialogResult.Ignore:
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.None:
+                    break;
+                case DialogResult.Retry:
+                case DialogResult.OK:
+                case DialogResult.Yes:
+                    this.printDocument.PrintPage += PrintPage;
+                    this.printDocument.Print();
+                    this.printDocument.PrintPage -= PrintPage;
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
