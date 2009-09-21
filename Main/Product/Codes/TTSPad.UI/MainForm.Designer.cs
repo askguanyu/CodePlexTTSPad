@@ -268,10 +268,10 @@
             this.radioButtonMale.Checked = true;
             this.radioButtonMale.Location = new System.Drawing.Point(12, 397);
             this.radioButtonMale.Name = "radioButtonMale";
-            this.radioButtonMale.Size = new System.Drawing.Size(45, 17);
+            this.radioButtonMale.Size = new System.Drawing.Size(48, 17);
             this.radioButtonMale.TabIndex = 5;
             this.radioButtonMale.TabStop = true;
-            this.radioButtonMale.Text = "Fale";
+            this.radioButtonMale.Text = "Male";
             this.radioButtonMale.UseVisualStyleBackColor = true;
             // 
             // radioButtonFemale
