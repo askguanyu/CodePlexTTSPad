@@ -60,6 +60,62 @@ namespace GY.TTSPad.UI.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap player_eject {
+            get {
+                object obj = ResourceManager.GetObject("player_eject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_end {
+            get {
+                object obj = ResourceManager.GetObject("player_end", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_fwd {
+            get {
+                object obj = ResourceManager.GetObject("player_fwd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_pause {
+            get {
+                object obj = ResourceManager.GetObject("player_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_play {
+            get {
+                object obj = ResourceManager.GetObject("player_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_rew {
+            get {
+                object obj = ResourceManager.GetObject("player_rew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_start {
+            get {
+                object obj = ResourceManager.GetObject("player_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap player_stop {
+            get {
+                object obj = ResourceManager.GetObject("player_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon TTSPad {
             get {
                 object obj = ResourceManager.GetObject("TTSPad", resourceCulture);
