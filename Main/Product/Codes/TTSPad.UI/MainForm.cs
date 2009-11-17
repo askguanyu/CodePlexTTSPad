@@ -158,7 +158,13 @@ namespace GY.TTSPad.UI
         {
             if (SynthesizerState.Speaking == this.speechSynthesizer.State)
             {
-                this.speechSynthesizer.SpeakAsyncCancelAll();
+                try
+                {
+                    this.speechSynthesizer.SpeakAsyncCancelAll();
+                }
+                catch
+                {
+                }
             }
         }
 
@@ -169,26 +175,32 @@ namespace GY.TTSPad.UI
         /// <param name="e"></param>
         private void buttonRead_Click(object sender, EventArgs e)
         {
-            this.speechSynthesizer.SelectVoice(this.comboBoxVoice.SelectedItem as string);
-            if (SynthesizerState.Speaking == this.speechSynthesizer.State)
+            try
             {
-                this.speechSynthesizer.SpeakAsyncCancelAll();
-            }
+                this.speechSynthesizer.SelectVoice(this.comboBoxVoice.SelectedItem as string);
+                if (SynthesizerState.Speaking == this.speechSynthesizer.State)
+                {
+                    this.speechSynthesizer.SpeakAsyncCancelAll();
+                }
 
-            if (this.textBoxMainText.SelectionLength > 0)
-            {
-                this.textToSpeech = this.textBoxMainText.SelectedText;
-                this.wordOffset = this.textBoxMainText.SelectionStart;
-            }
-            else
-            {
-                this.textToSpeech = this.textBoxMainText.Text;
-                this.wordOffset = 0;
-            }
+                if (this.textBoxMainText.SelectionLength > 0)
+                {
+                    this.textToSpeech = this.textBoxMainText.SelectedText;
+                    this.wordOffset = this.textBoxMainText.SelectionStart;
+                }
+                else
+                {
+                    this.textToSpeech = this.textBoxMainText.Text;
+                    this.wordOffset = 0;
+                }
 
-            if (!string.IsNullOrEmpty(this.textToSpeech))
+                if (!string.IsNullOrEmpty(this.textToSpeech))
+                {
+                    this.speechSynthesizer.SpeakAsync(new Prompt(this.textToSpeech));
+                }
+            }
+            catch
             {
-                this.speechSynthesizer.SpeakAsync(new Prompt(this.textToSpeech));
             }
         }
 
